@@ -4,6 +4,7 @@ import com.example.SpringBatchTutorial.core.domain.accounts.Accounts;
 import com.example.SpringBatchTutorial.core.domain.accounts.AccountsRepository;
 import com.example.SpringBatchTutorial.core.domain.orders.Orders;
 import com.example.SpringBatchTutorial.core.domain.orders.OrdersRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -23,6 +24,7 @@ import org.springframework.batch.item.data.RepositoryItemWriter;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.batch.item.data.builder.RepositoryItemWriterBuilder;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
@@ -36,21 +38,20 @@ import java.util.stream.Collectors;
  * --spring.batch.job.names=trMigrationJob
  * */
 @Configuration
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class TrMigrationConfig {
 
-    private final JobBuilderFactory jobBuilderFactory; // Job 생성
-
-    private final StepBuilderFactory stepBuilderFactory; // Step 생성
-    /*
-     * 두 객체를 활용하여 Job과 Step을 생성할꺼야
-     Job은 JobBuilderFactory로 만들고
-     Step은 StepBuilderFactory로 만들자.
-    * */
-
     private final OrdersRepository ordersRepository;
+
+
     private final AccountsRepository accountsRepository;
+
+
+    private final JobBuilderFactory jobBuilderFactory;
+
+
+    private final StepBuilderFactory stepBuilderFactory;
     int currentIndex = 0;
     @Bean
     public Job trMigrationJob(Step trMigrationStep){

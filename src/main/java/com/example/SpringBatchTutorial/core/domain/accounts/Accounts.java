@@ -3,6 +3,7 @@ package com.example.SpringBatchTutorial.core.domain.accounts;
 import com.example.SpringBatchTutorial.core.domain.orders.Orders;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @ToString
 @Getter
+@NoArgsConstructor
 public class Accounts {
 
     @Id
@@ -36,6 +38,8 @@ public class Accounts {
         this.orderDate = orderDate;
         this.accountDate = new Date();
     }
+
+
 
     public static Accounts create(Orders orders) {
         return Accounts.builder()

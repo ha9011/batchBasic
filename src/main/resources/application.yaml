@@ -11,7 +11,7 @@ spring:
   batch:
     job:
       names: ${job.name:NONE}  # Job ??? ????? ??? ???
-      #enabled: false
+      enabled: false # 설정에 파라미터를 무시(스케줄용)
     jdbc:
       initialize-schema: ALWAYS # ?? ???
   datasource:
@@ -27,5 +27,10 @@ spring:
   config:
     activate:
       on-profile: test
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/security
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
   jpa:
-    database: h2
+    show-sql: true
